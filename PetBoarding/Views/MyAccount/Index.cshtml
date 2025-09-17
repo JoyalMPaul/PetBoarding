@@ -1,0 +1,47 @@
+﻿@using PetBoarding.Models
+@model OwnerModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1 class="text-center mb-4">My Account</h1>
+
+<div class="d-flex justify-content-center">
+    <table class="table table-bordered table-dark w-75 text-center">
+        <tr>
+            <th>Email</th>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>
+                @(Model.PhoneNumber != null && Model.PhoneNumber.Length == 10
+                    ? Model.PhoneNumber.Substring(0,3) + "-" +
+                      Model.PhoneNumber.Substring(3,3) + "-" +
+                      Model.PhoneNumber.Substring(6,4)
+                    : Model.PhoneNumber)
+            </td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td>@Model.Age</td>
+        </tr>
+    </table>
+</div>
+
+<br />
+<h4 class="text-center">Manage your pets and bookings using the bar above!</h4>
+<h4 class="text-center"><strong>*To change any sensitive info, contact us through the contact us page.</strong></h4>
+
+<br />
+<a href="/ContactUs" class="btn btn-primary w-50 mt-3 d-block mx-auto">Contact Us</a>   

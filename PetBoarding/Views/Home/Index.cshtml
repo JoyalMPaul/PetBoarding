@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!--Styles-->
+<style>
+    .description {
+        list-style-type: disc; 
+        padding-left: 40px; 
+    }
+    .description li {
+        margin-left: 10px; 
+    }
+</style>
+
+<!--Format-->
+<main>
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title"> Joyal's Animal Daycare</h1>
+        <p class="lead">A secure place to leave your pets when needed!</p>
+        <h2 id="description_info">Why us:</h2>
+        <ul class="description">
+            <li>24/7 Relaible contact with a variety of bookings to choose from</li>
+            <li>Top-tier variety of professional    staff that works tirelessly to offer you and your pets the best service</li>
+            <li>Easy website portal to track all your info with emails for updates, reminders, etc</li>
+        </ul>
+        <p><a href="/Hours" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+    </section>
+
+    <h1>To Get Started: </h1>
+    <div class="row">
+        <section class="col-md-4" aria-labelledby="addYourPets">
+            <h2 id="petsTitle">1. Add your pets</h2>
+            <img src="@Url.Content("~/Content/images/Pets.jpg")" alt="Photo 1" />
+        </section>
+
+        <section class="col-md-4" aria-labelledby="createYourBookings">
+            <h2 id="bookingsTitle">2. Select a date</h2>
+            <img src="@Url.Content("~/Content/images/Calendar.png")" alt="Photo 1" style="width:50%; height:auto;" />
+        </section>
+
+        <section class="col-md-4" aria-labelledby="finished">
+            <h2 id="vacationTitle">3. Enjoy that getaway</h2>
+            <img src="@Url.Content("~/Content/images/Vacation.jpg")" alt="Photo 1" style="width:75%; height:auto;" />
+        </section>
+    </div>
+</main>

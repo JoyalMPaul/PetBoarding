@@ -1,0 +1,49 @@
+﻿@using PetBoarding.Models
+@model List<BookingsModel>
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>My Bookings</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Booking ID</th>
+            <th scope="col">Pet Name</th>
+            <th scope="col">Book In Time</th>
+            <th scope="col">Book Out Time</th>
+            <th scope="col">Room Number</th>
+            <th scope="col">Caretaker ID</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <th scope="row">@booking.BookingID</th>
+                <td>@booking.Pet.Name</td>
+                <td>@booking.BookInTime</td>
+                <td>@booking.BookOutTime</td>
+                <td>@booking.RoomNumber</td>
+                <td>@booking.CareTakerID</td>
+                <td>
+                    <a href="/Bookings/Remove?id=@booking.BookingID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("Add","Bookings")" class="btn btn-primary">Add New Booking</a>
+   
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />    
+
+<h4>
+    <strong>
+        *You can only add a booking after a pet is already made! If you have not done so,
+        use the button below:
+    </strong>
+</h4>
+
+<a href="/Pets" class="btn btn-primary w-50 mt-3 d-block mx-auto">Go To Pets</a>

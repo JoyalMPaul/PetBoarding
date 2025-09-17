@@ -1,0 +1,68 @@
+﻿@model PetBoarding.ViewModels.ContactUsSubmissionVM
+@{
+    ViewBag.Title = "Index";
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">Contact Us</h2>
+
+    @using (Html.BeginForm("Index", "ContactUs", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Let us know if you have any questions or problems!</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="row">
+            @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", maxlength = "50" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", maxlength = "50" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", maxlength = "100" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PhoneNumber, new
+           {
+               @class = "form-control",
+               type = "tel",
+               maxlength = 10,
+               oninput = "this.value = this.value.replace(/[^0-9]/g, '')"
+           })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.ReasonForContact, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ReasonForContact, new { @class = "form-control", maxlength = "30" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.BasicInfo, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.BasicInfo, new { @class = "form-control", style = "height:100px;", maxlength = "300"})
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-outline-dark" />
+            </div>
+        </div>
+    }
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

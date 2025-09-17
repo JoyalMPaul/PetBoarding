@@ -1,0 +1,148 @@
+name: WebAppTemplate
+run-name: WebAppTemplateCI
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+  workflow_dispatch: # Enables manual trigger
+
+env:
+  SOLUTION_FILE_PATH: .
+  BUILD_CONFIGURATION: Release
+  PUBLISH_DIR: '${{ github.workspace }}/publish'
+  PACKAGENAME: 'test-deploy'
+  PACKAGE_TMP_DIR: '${{ github.workspace }}\\WebAppTemplate\\obj\\Release\\Package\\PackageTmp'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: BuildAndTest
+    runs-on: windows
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    #- name: Manually clone submodule
+    #  run: |
+    #    git clone --recurse-submodules https://${{ secrets.PAT }}@git.websurfingstudios.com/WSSTools/WSSCore.git WSSCore
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v1
+      
+    - name: Restore NuGet
+      run: nuget restore ${{ env.SOLUTION_FILE_PATH }}
+      
+    - name: Create Publish Directory
+      run: mkdir -p ${{ env.PUBLISH_DIR }}
+
+    - name: Build and Publish Web App
+      working-directory: ${{ env.GITHUB_WORKSPACE }}
+      run: |
+        msbuild ${{ env.SOLUTION_FILE_PATH }} /m /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=".\YourWebApp.zip" /t:Rebuild
+    
+    - name: Run Unit Tests
+      shell: powershell
+      run: |
+        dotnet test --verbosity normal
+    
+    - name: Log Publish Directory Contents
+      run: |
+        echo "Contents of PackageTmp:"
+        ls -l "${{ env.PACKAGE_TMP_DIR }}"
+
+    - name: Zip Publish Directory
+      shell: powershell
+      run: |
+        $zipPath = "${env:PUBLISH_DIR}\WebAppTemplate.zip"
+        $sourcePath = "${env:PACKAGE_TMP_DIR}"
+        Write-Output "Zipping contents of $sourcePath to $zipPath"
+        if (Test-Path $zipPath) { Remove-Item $zipPath }
+        Compress-Archive -Path "$sourcePath\*" -DestinationPath $zipPath
+        Write-Output "ZIP created at: $zipPath"
+
+    - name: Deploy Artifact
+      if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'workflow_dispatch'
+      shell: powershell
+      env:
+        GIT_COMMIT_HASH: ${{ github.sha }}
+        COMMIT_MESSAGE_HEAD: ${{ github.event.head_commit.message }}
+        COMMIT_MESSAGE_PR: ${{ github.event.pull_request.title }}
+      run: |
+       Write-Output "========== DEPLOYMENT STEP STARTED =========="
+       Write-Output "Deployment Script Initialized"
+       
+       # Log the deployment directory
+       $publishDir = "${env:PUBLISH_DIR}"
+       Write-Output "Deployment Directory: $publishDir"
+       Write-Output "Searching for ZIP artifacts in the directory..."
+       
+       # Find the ZIP artifact
+       $artifact = Get-ChildItem -Path $publishDir -Filter *.zip | Select-Object -First 1
+       
+       if (-not $artifact) {
+           Write-Error "No ZIP artifact found in '$publishDir'. Deployment cannot proceed."
+           exit 1
+       }
+       
+       # Log artifact details
+       Write-Output "ZIP Artifact Found:"
+       Write-Output "  Path: $($artifact.FullName)"
+       Write-Output "  Size: $([Math]::Round($artifact.Length / 1MB, 2)) MB"
+       Write-Output "  Last Modified: $($artifact.LastWriteTime)"
+       
+       # Resolve the commit message
+       Write-Output "Resolving Commit Message..."
+       $commitMessage = "${env:COMMIT_MESSAGE_HEAD}"
+       Write-Output "COMMIT_MESSAGE_HEAD: $commitMessage"
+       
+       if ([string]::IsNullOrWhiteSpace($commitMessage)) {
+           $commitMessage = "${env:COMMIT_MESSAGE_PR}"
+           Write-Output "COMMIT_MESSAGE_PR: $commitMessage"
+       }
+       
+       # If both environment variables are empty, try to get the last commit manually
+       if ([string]::IsNullOrWhiteSpace($commitMessage)) {
+           Write-Output "No commit message from event context, attempting to fetch from git log..."
+           $commitMessage = git log -1 --pretty=%B
+       }
+       
+       if ([string]::IsNullOrWhiteSpace($commitMessage)) {
+           $commitMessage = "Manual trigger or unknown event"
+           Write-Output "Commit Message Defaulted to: $commitMessage"
+       }
+       
+       Write-Output "Final Commit Message: $commitMessage"
+       
+       # Debugging commit hash
+       $commitHash = "${env:GIT_COMMIT_HASH}"
+       Write-Output "Debug: Commit Hash = $commitHash"
+       
+       # Define PackageName variable
+       $packageName = "${env:PACKAGENAME}"
+       Write-Output "Package Name: $packageName"
+       
+       # Logging curl path
+       $curlPath = "C:\Windows\System32\curl.exe"
+       Write-Output "Using curl executable at: $curlPath"
+       
+       # Execute curl command
+       Write-Output "Starting deployment using curl..."
+       & $curlPath --location `
+       'https://deploy.websurfingstudios.com/api/Upload/Artifact' `
+       --form "PackageName=$packageName" `
+       --form "=@$($artifact.FullName)" `
+       --form "CommitHash=$commitHash" `
+       --form "CommitMessage=$commitMessage"
+       
+       Write-Output "========== DEPLOYMENT STEP COMPLETED =========="

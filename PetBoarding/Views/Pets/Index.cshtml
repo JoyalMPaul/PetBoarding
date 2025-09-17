@@ -1,0 +1,42 @@
+﻿@using PetBoarding.Models
+@model List<PetModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>My Pets</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Pet ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Breed</th>
+            <th scope="col">Age</th>
+            <th scope="col">Dietary Instructions</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pet in Model)
+        {
+            <tr>
+                <th scope="row">@pet.PetID</th>
+                <td>@pet.Name</td>
+                <td>@pet.Gender</td>
+                <td>@pet.Breed</td>
+                <td>@pet.Age</td>
+                <td>@pet.DietaryInstructions</td>
+                <td>
+                    <a href="/Pets/Edit?petID=@pet.PetID" class="btn btn-outline-dark">Edit</a>
+                </td>
+                <td>
+                    <a href="/Pets/Remove?id=@pet.PetID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("Add","Pets")" class="btn btn-primary">Add New Pet</a>

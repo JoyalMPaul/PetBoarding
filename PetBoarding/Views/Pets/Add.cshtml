@@ -1,0 +1,81 @@
+﻿@model PetBoarding.ViewModels.PetAddVM
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add Pets</h2>
+
+@using (Html.BeginForm("Add", "Pets", FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="row">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", maxlength = 50 })
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Gender,
+        new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Male", Value = "Male" },
+            new SelectListItem { Text = "Female", Value = "Female" }
+        },
+        "-- Select Gender --",
+        new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.Breed, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Breed, new { @class = "form-control", maxlength = 50 })
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.Age, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Age, new
+           {
+                @class = "form-control",
+                type = "number",
+                min = "1",
+                max = "50"
+           })
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.EmergencyContact, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.EmergencyContact, new
+           {
+               @class = "form-control",
+               type = "tel",
+               maxlength = 10,
+               oninput = "this.value = this.value.replace(/[^0-9]/g, '')"
+           })
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.DietaryInstructions, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.DietaryInstructions, new { @class = "form-control", maxlength = 500 })
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-2 col-md-10">
+            <input type="submit" value="Add Pet" class="btn btn-outline-dark" />
+            <a href="@Url.Action("Index","Pets")" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+}
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
