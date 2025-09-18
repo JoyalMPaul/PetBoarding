@@ -26,15 +26,15 @@ This is my [][] </br>
  - Authorization & Authentication
  - Other (Lazy Loading, View Models, Partials, etc.)
 
-### ERD
+### 🗺️ ERD
 <img width="852" height="678" alt="Pet_Boarding_ERD" src="https://github.com/user-attachments/assets/6750f538-0ef2-4775-b752-7850e27d951c" />
 
-### Wireframe
+### 📐 Wireframe
 
 User Interface: </br>
 <img width="882" height="712" alt="PetBoarding_Wireframe_UserInterface" src="https://github.com/user-attachments/assets/7a38f4c6-dba4-49b7-ae06-9d0be6abfcd7" />
 
-Admin Interface: 
+Admin Interface: </br>
 <img width="1116" height="702" alt="PetBoarding_Wireframe_AdminInterface" src="https://github.com/user-attachments/assets/3804f301-8599-495e-b472-6c077fe42ebf" />
 
 
