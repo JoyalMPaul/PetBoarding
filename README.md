@@ -31,7 +31,7 @@ This is my [][] </br>
 
 ### Wireframe
 
-User Interface:
+User Interface: </br>
 <img width="882" height="712" alt="PetBoarding_Wireframe_UserInterface" src="https://github.com/user-attachments/assets/7a38f4c6-dba4-49b7-ae06-9d0be6abfcd7" />
 
 Admin Interface: 
