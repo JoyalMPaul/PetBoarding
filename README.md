@@ -2,7 +2,7 @@
 
 ## Project Description
 
-👉 **Live Website:** [Pet Boarding]([https://joyal-paul.onrender.com](https://petboarding-a7c0ggbrfcc3gfdn.canadacentral-01.azurewebsites.net/)) </br>
+👉 **Live Website:** [Pet Boarding]([https://petboarding-a7c0ggbrfcc3gfdn.canadacentral-01.azurewebsites.net/]) </br>
 This is my Pet Boarding website built with the ASP.NET framework using C#. This website is hosted and deployed through Microsoft Azure. </br>
 
 ⚠️ **NOTE**: You must register and log-in before continuing on the website.
