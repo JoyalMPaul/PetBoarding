@@ -21,7 +21,7 @@ This is my Pet Boarding website built with the ASP.NET framework using C#. This 
 
  - Relationships: One-to-One, One-to-Many, Many-to-Many  
  - Entity Framework Concepts
- - CRUD operations
+ - CRUD operations and Get + Post Requests
  - Building ERDs and Wireframes
  - Authorization & Authentication
  - Other (Lazy Loading, View Models, Partials, etc.)
