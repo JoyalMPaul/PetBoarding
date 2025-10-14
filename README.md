@@ -11,7 +11,7 @@ This is my Pet Boarding website built with the ASP.NET framework using C#. This 
 ### 🛠 Teck Stack
 
  - ASP.NET v4.8 MVC Framework using C# (Backend) 
- - HTML / CSS / JavaScript (Frontend)
+ - HTML / CSS / JavaScript / Razor (Frontend)
  - Microsoft SQL Server (for local database testing)
  - Azure for deployment and hosting
  - GIT Version Control (commit/push/pull, clone repositories, Pull Requests, Merge Conflicts, Squash Commits)
