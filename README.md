@@ -24,7 +24,7 @@ This is my Pet Boarding website built with the ASP.NET framework using C#. This 
  - CRUD operations and Get + Post Requests
  - Building ERDs and Wireframes
  - Authorization & Authentication
- - Other (Lazy Loading, View Models, Partials, etc.)
+ - Other (Lazy Loading, Migrations, View Models, Partials, etc.)
 
 ### 🗺️ ERD:
 <img width="852" height="678" alt="Pet_Boarding_ERD" src="https://github.com/user-attachments/assets/6750f538-0ef2-4775-b752-7850e27d951c" />
