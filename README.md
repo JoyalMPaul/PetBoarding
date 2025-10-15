@@ -19,7 +19,7 @@ This is my Pet Boarding website built with the ASP.NET framework using C#. This 
 
 ### 🧠 Things I Learned
 
- - Relationships: One-to-One, One-to-Many, Many-to-Many  
+ - Relationships: One-to-One, One-to-Many, Many-to-Many, Primary Keys + Foreign Keys 
  - Entity Framework Concepts
  - CRUD operations and Get + Post Requests
  - Building ERDs and Wireframes
