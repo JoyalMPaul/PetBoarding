@@ -40,3 +40,4 @@ Admin Interface: </br>
 ### 📱 Extra
 
 This web application is hosted on Azure's cloud infrastructure, with the backend SQL database being managed in Azure SQL Database. Since I am on free plan, there is a monthly quota which I don't happen to exceed any time soon. However, if you run into any problems while using the website, please feel free to contact me or even use the contact form on the site!
+Also, resetting password through email doesn't work at this tume since the email credential is only configured to my debugging email for now.
