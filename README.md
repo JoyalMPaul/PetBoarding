@@ -24,7 +24,7 @@ This is my Pet Boarding website built with the ASP.NET framework using C#. This 
  - CRUD operations and Get + Post Requests
  - Building ERDs and Wireframes
  - Authorization & Authentication
- - Email-based password reset through SMTP
+ - Email-based password reset using SMTP
  - Other (Lazy Loading, Migrations, View Models, Partials, etc.)
 
 ### 🗺️ ERD:
