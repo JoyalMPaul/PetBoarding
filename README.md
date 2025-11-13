@@ -41,5 +41,5 @@ Admin Interface: </br>
 
 ### 📱 Extra
 
-This web application is hosted on Azure's cloud infrastructure, with the database being managed in Azure SQL Database. Since I am on free plan, there is a monthly quota which I don't happen to exceed any time soon. However, if you run into any problems while using the website, please feel free to contact me or even use the contact form on the site!
+This web application is hosted on Azure's cloud infrastructure, with the database being managed in Azure SQL Database. Since I am on Basic Pay-As-You-Go plan with a limited budget, there is a monthly quota which I don't expect to exceed any time soon. However, if you run into any problems while using the website, please feel free to contact me or even use the contact form on the site!
 Also, resetting password through email doesn't work at this time since the email credential service is only configured to my debugging email for now.
